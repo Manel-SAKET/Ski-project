@@ -82,6 +82,35 @@
                 </execution>
             </executions>
         </plugin>
+	<plugin>
+		<groupId>org.jacoco</groupId>
+		<artifactId>jacoco-maven-plugin</artifactId>
+		<version>0.8.7</version>
+		<executions>
+		<!-- Prepares the property pointing to the JaCoCo runtime agent -->
+		<execution>
+		<id>pre-unit-test</id>
+		<goals>
+		  <goal>prepare-agent</goal>
+		</goals>
+		<configuration>
+		  <propertyName>surefireArgLine</propertyName>
+		</configuration>
+		</execution>
+		<!-- Creates code coverage report for unit tests -->
+		<execution>
+		<id>post-unit-test</id>
+		<phase>test</phase>
+		<goals>
+		  <goal>report</goal>
+		</goals>
+		<configuration>
+		<dataFile>target/jacoco.exec</dataFile>
+		<outputDirectory>target/jacoco-ut</outputDirectory>
+		</configuration>
+		</execution>
+		</executions>
+		</plugin>
         </plugins>
     </build>
 
